@@ -101,14 +101,18 @@ with right_col:
     st.subheader("📊 Result")
 
     if predict_button:
+        # ---------- CLEAN NAME (case + spaces insensitive) ----------
+        # Original name as typed (for display)
+        display_name = name.strip() if name.strip() != "" else "You"
+
+        # Normalized name for matching (remove spaces + lowercase)
+        norm_name = name.strip().replace(" ", "").lower()
 
         # ---------- REVERSE CURSED NAMES (ALWAYS SURVIVE) ----------
-        reverse_cursed = ["kartik","siya", "priyansh", "pkd", "anish"]
-        name_clean = name.strip()
-        name_lower = name_clean.lower()
+        reverse_cursed = ["kartik", "priyansh", "pkd", "siya"]
 
-        if name_lower in reverse_cursed and name_clean != "":
-            st.success(f"🦸‍♂️ {name_clean} ALWAYS survives. Destiny bends for you.")
+        if norm_name in reverse_cursed and name.strip() != "":
+            st.success(f"🦸‍♂️ {display_name} ALWAYS survives. Destiny bends for you.")
             st.markdown(
                 "> The ship may sink. The ocean may roar. But you? You rise above it all. "
                 "You find a lifeboat, path opens magically, and even the iceberg apologizes. 🛟"
@@ -117,18 +121,17 @@ with right_col:
             st.write("### 🍀 Titanic Fate Summary")
             summary_df = pd.DataFrame({
                 "Field": ["Name", "Fate"],
-                "Value": [name_clean, "Chosen One – Always Survives 🦸‍♂️"]
+                "Value": [display_name, "Chosen One – Always Survives 🦸‍♂️"]
             })
             st.table(summary_df)
 
             st.stop()
 
         # ---------- CURSED NAMES (NEVER SURVIVE) ----------
-        cursed_list = ["archit", "ujwal", "mohit", "pranjal", "piyush","Jaspreet","Achintya",
-                      "Harshit","Saurabh Gangwar"]
+        cursed_list = ["archit", "ujwal", "mohit", "pranjal", "piyush"]
 
-        if name_lower in cursed_list and name_clean != "":
-            st.error(f"💀 {name_clean} can NEVER EVER survive in any universe. Not even in parallel dimensions. 💀")
+        if norm_name in cursed_list and name.strip() != "":
+            st.error(f"💀 {display_name} can NEVER EVER survive in any universe. Not even in parallel dimensions. 💀")
             st.markdown(
                 "> Destiny has spoken. Even if you were in 1st class with 20 lifejackets, "
                 "your cursed luck would still drag you down with the ship 😭"
@@ -137,7 +140,7 @@ with right_col:
             st.write("### ⚰️ Titanic Fate Summary")
             summary_df = pd.DataFrame({
                 "Field": ["Name", "Fate"],
-                "Value": [name_clean, "Doomed beyond repair 💀"]
+                "Value": [display_name, "Doomed beyond repair 💀"]
             })
             st.table(summary_df)
 
@@ -156,7 +159,7 @@ with right_col:
             st.error(f"Prediction error: {e}")
             st.stop()
 
-        person = name_clean if name_clean != "" else "You"
+        person = display_name
 
         # Survival meter
         st.write("### 🎚 Survival Chance Meter")
@@ -192,6 +195,3 @@ with right_col:
 
     else:
         st.info("Fill the details on the left and click 'Will I Survive?' to see your prediction.")
-
-
-
