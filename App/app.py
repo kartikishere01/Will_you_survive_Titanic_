@@ -125,7 +125,7 @@ with right_col:
 
         # ---------- CURSED NAMES (NEVER SURVIVE) ----------
         cursed_list = ["archit", "ujwal", "mohit", "pranjal", "piyush","Jaspreet","Achitnya",
-                      "Harshit"]
+                      "Harshit","Saurabh Gangwar"]
 
         if name_lower in cursed_list and name_clean != "":
             st.error(f"💀 {name_clean} can NEVER EVER survive in any universe. Not even in parallel dimensions. 💀")
@@ -192,4 +192,5 @@ with right_col:
 
     else:
         st.info("Fill the details on the left and click 'Will I Survive?' to see your prediction.")
+
 
