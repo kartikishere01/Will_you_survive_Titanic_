@@ -124,7 +124,7 @@ with right_col:
             st.stop()
 
         # ---------- CURSED NAMES (NEVER SURVIVE) ----------
-        cursed_list = ["archit", "ujwal", "mohit", "pranjal", "piyush","Jaspreet","Achitnya",
+        cursed_list = ["archit", "ujwal", "mohit", "pranjal", "piyush","Jaspreet","Achintya",
                       "Harshit","Saurabh Gangwar"]
 
         if name_lower in cursed_list and name_clean != "":
@@ -192,5 +192,6 @@ with right_col:
 
     else:
         st.info("Fill the details on the left and click 'Will I Survive?' to see your prediction.")
+
 
 
