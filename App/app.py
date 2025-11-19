@@ -101,7 +101,48 @@ with right_col:
     st.subheader("📊 Result")
 
     if predict_button:
-        # Prepare input
+
+        # ---------- REVERSE CURSED NAMES (ALWAYS SURVIVE) ----------
+        reverse_cursed = ["kartik","siya", "priyansh", "pkd", "anish"]
+        name_clean = name.strip()
+        name_lower = name_clean.lower()
+
+        if name_lower in reverse_cursed and name_clean != "":
+            st.success(f"🦸‍♂️ {name_clean} ALWAYS survives. Destiny bends for you.")
+            st.markdown(
+                "> The ship may sink. The ocean may roar. But you? You rise above it all. "
+                "You find a lifeboat, path opens magically, and even the iceberg apologizes. 🛟"
+            )
+
+            st.write("### 🍀 Titanic Fate Summary")
+            summary_df = pd.DataFrame({
+                "Field": ["Name", "Fate"],
+                "Value": [name_clean, "Chosen One – Always Survives 🦸‍♂️"]
+            })
+            st.table(summary_df)
+
+            st.stop()
+
+        # ---------- CURSED NAMES (NEVER SURVIVE) ----------
+        cursed_list = ["archit", "ujwal", "mohit", "pranjal", "piyush","Jashpreet","Achitnya"]
+
+        if name_lower in cursed_list and name_clean != "":
+            st.error(f"💀 {name_clean} can NEVER EVER survive in any universe. Not even in parallel dimensions. 💀")
+            st.markdown(
+                "> Destiny has spoken. Even if you were in 1st class with 20 lifejackets, "
+                "your cursed luck would still drag you down with the ship 😭"
+            )
+
+            st.write("### ⚰️ Titanic Fate Summary")
+            summary_df = pd.DataFrame({
+                "Field": ["Name", "Fate"],
+                "Value": [name_clean, "Doomed beyond repair 💀"]
+            })
+            st.table(summary_df)
+
+            st.stop()
+
+        # ---------- NORMAL ML PREDICTION ----------
         input_df = pd.DataFrame(
             [[pclass, sex_val, age]],
             columns=['Pclass', 'Sex', 'Age']
@@ -114,7 +155,7 @@ with right_col:
             st.error(f"Prediction error: {e}")
             st.stop()
 
-        person = name.strip() if name.strip() != "" else "You"
+        person = name_clean if name_clean != "" else "You"
 
         # Survival meter
         st.write("### 🎚 Survival Chance Meter")
